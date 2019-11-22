@@ -25,8 +25,8 @@ class SerialThread(threading.Thread):
         self.scan_ports()
         threading.Timer(1, self.update).start()
 
-    def read_data(self):
-        line = self.ser.read()
+    def read_data(self, ser):
+        line = ser.read()
         # only show bytes with content, not the empty ones
         if line != b'':
             while line is not None:
@@ -35,10 +35,10 @@ class SerialThread(threading.Thread):
 
                 return ord(line)
 
-    def handshake(self):
+    def handshake(self, serial):
         if self.read_data() == 255:
             self.write_data(b'\xFF')
-            device_id = self.read_data()
+            device_id = self.read_data(serial)
 
             if device_id == 150:  # 0x96
                 device = 'TEMPERATURE'
@@ -60,12 +60,12 @@ class SerialThread(threading.Thread):
                     print('Found device on:', port.device)
 
                     # found a device, now perform the handshake
-                    device = self.handshake()
+                    ser = serial.Serial(port, baudrate=19200, timeout=5)
+                    device = self.handshake(ser)
 
                     # now we know what type device we have
                     # create a device object and save it in the
                     # self.connected devices dictionary
-                    ser = serial.Serial(port, baudrate=19200, timeout=5)
                     temp = Device(device, ser)
                     self.connected_devices[port] = temp
                     print(device, "Connected")
