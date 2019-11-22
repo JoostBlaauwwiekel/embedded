@@ -176,14 +176,3 @@ class Gui(threading.Thread):
         ttk.Label(tab1, text="\nCopyright © 2019 Zeng Ltd.").grid(row = 2, columnspan = 5)
 
         root.mainloop()
-
-
-class Main():
-    def __init__(self):
-        self.gui = Gui()
-        self.gui.start()
-        while(True):
-            self.gui.update()
-            sleep(5)
-
-main = Main()
