@@ -6,7 +6,6 @@ from time import sleep
 
 class Gui(threading.Thread):
 
-    # test
     def __init__(self):
         threading.Thread.__init__(self)
         self.last_temperature = "Onbekend "
