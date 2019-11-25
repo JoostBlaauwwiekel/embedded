@@ -57,25 +57,28 @@ class SerialThread(threading.Thread):
                 device = 'LIGHT'
             else:
                 print("ERROR: Something went wrong with the handshake!")
+                device = 0
 
             print('Found', device)
+        else:
+            device = 0
 
-            return device
+        return device
 
     # this function scans ports to see if a device is connected
     def scan_ports(self):
         for port in serial.tools.list_ports.comports():
             try:
                 # if a device is not connected and found by this function:
-                if "COM3" == port.device:
 
-                    # found a device, now perform the handshake
-                    ser = serial.Serial(port.device, baudrate=19200, timeout=5)
-                    device = self.handshake(ser)
+                # found a device, now perform the handshake
+                ser = serial.Serial(port.device, baudrate=19200, timeout=5)
+                device = self.handshake(ser)
 
-                    # now we know what type device we have
-                    # create a device object and save it in the
-                    # self.connected devices dictionary
+                # now we know what type device we have
+                # create a device object and save it in the
+                # self.connected devices dictionary
+                if device != 0:
                     temp = Device(device, ser)
                     self.connected_devices.append(tuple((device, temp, port.device)))
                     print(device, "Connected")
