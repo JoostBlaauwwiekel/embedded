@@ -22,15 +22,14 @@ class Main(Thread):
             sleep(5)
 
             try:
-                print(connected_devices)
-
                 for device in connected_devices:
                     if device[0] == 'TEMPERATURE':
-                            ast_temperature = device[1].read_data()
+                        last_temperature = device[1].read_data()
 
                     if device[0] == 'LIGHT':
                         last_light = device[1].read_data()
             except:
                 continue
+
 
 main = Main()

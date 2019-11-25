@@ -28,7 +28,7 @@ class SerialThread(threading.Thread):
     def update(self):
         self.check_connections()
         self.scan_ports()
-        threading.Timer(5, self.update).start()
+        threading.Timer(1, self.update).start()
 
         # function that write a number to the arduino
 
@@ -58,7 +58,7 @@ class SerialThread(threading.Thread):
             else:
                 print("ERROR: Something went wrong with the handshake!")
 
-            #print('Unit is:', device)
+            print('Found', device)
 
             return device
 
@@ -68,7 +68,6 @@ class SerialThread(threading.Thread):
             try:
                 # if a device is not connected and found by this function:
                 if "COM3" == port.device:
-                    #print('Found device on:', port.device)
 
                     # found a device, now perform the handshake
                     ser = serial.Serial(port.device, baudrate=19200, timeout=5)
@@ -79,11 +78,7 @@ class SerialThread(threading.Thread):
                     # self.connected devices dictionary
                     temp = Device(device, ser)
                     self.connected_devices.append(tuple((device, temp, port.device)))
-                    #print(device, "Connected")
-
-                # when a the list has a port with no device left
-                # delete the key and value from the dictionary
-                # THIS PART HAS NOT BEEN TESTED YET
+                    print(device, "Connected")
             except:
                 continue
 
