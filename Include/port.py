@@ -46,6 +46,10 @@ class SerialThread(threading.Thread):
 
                 return ord(line)
 
+    # in this function we will determine what kind of
+    # device is connected. If the device responds to our
+    # handshake, we will open a connection
+    # otherwise we will ignore the device
     def handshake(self, serial):
         if self.read_data(serial) == 255:
             self.write_data(serial, b'\xFF')
@@ -56,7 +60,6 @@ class SerialThread(threading.Thread):
             elif device_id == 105:  # 0x69
                 device = 'LIGHT'
             else:
-                print("ERROR: Something went wrong with the handshake!")
                 device = 0
 
             print('Found', device)
@@ -69,8 +72,6 @@ class SerialThread(threading.Thread):
     def scan_ports(self):
         for port in serial.tools.list_ports.comports():
             try:
-                # if a device is not connected and found by this function:
-
                 # found a device, now perform the handshake
                 ser = serial.Serial(port.device, baudrate=19200, timeout=5)
                 device = self.handshake(ser)
@@ -78,6 +79,7 @@ class SerialThread(threading.Thread):
                 # now we know what type device we have
                 # create a device object and save it in the
                 # self.connected devices dictionary
+                # 0 means an unknown device, look at handshake()
                 if device != 0:
                     temp = Device(device, ser)
                     self.connected_devices.append(tuple((device, temp, port.device)))
@@ -85,6 +87,11 @@ class SerialThread(threading.Thread):
             except:
                 continue
 
+    # this method removes a open connection from the
+    # connected_devices list when a device is no longer
+    # connected. We will send a message to all the connected
+    # devices, when a device is not connected it will raise
+    # a SerialException.
     def check_connections(self):
         for connection in self.connected_devices:
             try:
