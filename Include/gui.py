@@ -4,6 +4,7 @@ from threading import *
 import threading
 from time import sleep
 
+
 class Gui(threading.Thread):
 
     def __init__(self):
@@ -25,11 +26,15 @@ class Gui(threading.Thread):
         self.label3 = Label
         self.label4 = Label
         self.label5 = Label
+
         self.connected_devices = []
 
     def run(self):
-        self.render()
         self.update()
+        self.render()
+
+    def set_devices(self, devices):
+        self.connected_devices = devices
 
     def get_last_temperature(self):
         if self.last_temperature == 'Onbekend':
@@ -82,28 +87,25 @@ class Gui(threading.Thread):
             return "Luchtvochtigheidsensor\n\nAangesloten"
 
     def update(self):
-        try:
-            if "LIGHT" in self.connected_devices:
-                self.label1.config(text=self.change_light())
-                self.light.config(text=self.get_last_light())
+        if "LIGHT" in self.connected_devices:
+            self.label1.config(text=self.change_light())
+            self.light.config(text=self.get_last_light())
 
-            if "TEMPERATURE" in self.connected_devices:
-                self.label2.config(text=self.change_temperature())
-                self.temperature.config(text=self.get_last_temperature())
+        if "TEMPERATURE" in self.connected_devices:
+            self.label2.config(text=self.change_temperature())
+            self.temperature.config(text=self.get_last_temperature())
 
-            if "WIND" in self.connected_devices:
-                self.label3.config(text=self.change_wind())
-                self.wind.config(text=self.get_last_wind())
+        if "WIND" in self.connected_devices:
+            self.label3.config(text=self.change_wind())
+            self.wind.config(text=self.get_last_wind())
 
-            if "RAIN" in self.connected_devices:
-                self.label4.config(text=self.change_rain())
-                self.rain.config(text=self.get_last_rain())
+        if "RAIN" in self.connected_devices:
+            self.label4.config(text=self.change_rain())
+            self.rain.config(text=self.get_last_rain())
 
-            if "AIR" in self.connected_devices:
-                self.label5.config(text=self.change_air())
-                self.air.config(text=self.get_last_air())
-
-        except: TypeError
+        if "AIR" in self.connected_devices:
+            self.label5.config(text=self.change_air())
+            self.air.config(text=self.get_last_air())
 
         threading.Timer(1, self.update).start()
 

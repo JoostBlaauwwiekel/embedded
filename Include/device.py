@@ -8,7 +8,6 @@ from threading import *
 class Device(threading.Thread):
 
     def __init__(self, device, ser):
-        # Thread.__init__(self)
         threading.Thread.__init__(self)
         self.ser = ser
         self.device = device
