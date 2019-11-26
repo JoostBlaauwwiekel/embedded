@@ -2,6 +2,7 @@ import serial as serial
 import time
 import threading
 from threading import *
+from tkinter import messagebox
 
 
 # noinspection PyMethodMayBeStatic
@@ -60,8 +61,10 @@ class Device(threading.Thread):
             self.write_data(bytes([new_max]))
             self.device_max_border = new_max
             print("Maximale uitrol waarde is succesvol aangepast")
+            messagebox.showinfo("Melding", "Maximale uitrol waarde is succesvol aangepast")
         else:
             print("Fout: Maximale uitrol waarde mag niet kleiner zijn dan de maximale oprol waarde")
+            messagebox.showinfo("Melding", "Fout: Maximale uitrol waarde mag niet kleiner zijn dan de maximale oprol waarde")
 
     # change maximum roll in border
     def change_min_border(self, new_min):
@@ -71,8 +74,10 @@ class Device(threading.Thread):
             self.write_data(bytes([new_min]))
             self.device_min_border = new_min
             print("Maximale oprol waarde is succesvol aangepast")
+            messagebox.showinfo("Melding", "Maximale oprol waarde is succesvol aangepast")
         else:
             print("Fout: Maximale oprol waarde mag niet groter zijn dan de maximale uitrol waarde")
+            messagebox.showinfo("Melding", "Fout: Maximale oprol waarde mag niet groter zijn dan de maximale uitrol waarde")
 
     # manually roll out
     def manual_roll_out(self):
