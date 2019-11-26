@@ -119,7 +119,6 @@ class Gui(threading.Thread):
 
     def change_gui(self):
         # change values in the GUI
-        print(self.connected_devices)
         try:
             self.label1.config(text=self.change_light())
             self.light.config(text=self.get_last_light())
