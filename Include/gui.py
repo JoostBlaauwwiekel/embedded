@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from threading import *
 import threading
-from time import sleep
+from tkinter import messagebox
 
 
 class Gui(threading.Thread):
@@ -148,6 +148,31 @@ class Gui(threading.Thread):
             if self.last_temperature != "Onbekend" and device[0] != 'TEMPERATURE':
                 self.last_temperature = "Onbekend"
 
+    # this functions sends a command to a device
+    def send_command(self, command, device):
+        if not self.connected_devices:
+            messagebox.showinfo("Melding", "Fout: Betreffend apparaat niet aangesloten")
+        else:
+            for connected_devices in self.connected_devices:
+                if connected_devices[0] == device:
+                    # when the device is connected
+                    if command == 'manual_roll_out':
+                        connected_devices[1].manual_roll_out()
+
+                    if command == 'manual_roll_in':
+                        connected_devices[1].manual_roll_in()
+
+                    if command == 'reset_to_default':
+                        connected_devices[1].reset_to_default()
+
+                    if command == 'disable_autoroll':
+                        connected_devices[1].disable_auto_roll()
+
+                    if command == 'enable_autoroll':
+                        connected_devices[1].enable_auto_roll()
+                else:
+                    messagebox.showinfo("Melding", "Fout: Betreffend apparaat niet aangesloten")
+
     def render(self):
         root = Tk()
         root.title("Centrale")
@@ -215,5 +240,43 @@ class Gui(threading.Thread):
 
         # just because its possible
         ttk.Label(tab1, text="\nCopyright © 2019 Zeng Ltd.").grid(row=2, columnspan=5)
+
+        # buttons and text for the light section
+        ttk.Label(tab2, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
+
+        ttk.Label(tab2, text="Handmatig uitrollen:").grid(row=1, column=0, stick="nsew")
+        ttk.Button(tab2, text='Handmatig uitrollen', command=lambda: self.send_command('manual_roll_out', 'LIGHT')).grid(row=1, column=1, stick="nsew")
+
+        ttk.Label(tab2, text="Handmatig oprollen:").grid(row=2, column=0, stick="nsew")
+        ttk.Button(tab2, text='Handmatig oprollen', command=lambda: self.send_command('manual_roll_in', 'LIGHT')).grid(row=2, column=1, stick="nsew")
+
+        ttk.Label(tab2, text="Automatisch rollen uitschakelen:").grid(row=3, column=0, stick="nsew")
+        ttk.Button(tab2, text='Automatisch rollen uitschakelen', command=lambda: self.send_command('disable_autoroll', 'LIGHT')).grid(row=3, column=1, stick="nsew")
+
+        ttk.Label(tab2, text="Automatisch rollen inschakelen:").grid(row=4, column=0, stick="nsew")
+        ttk.Button(tab2, text='Automatisch rollen inschakelen', command=lambda: self.send_command('enable_autoroll', 'LIGHT')).grid(row=4, column=1, stick="nsew")
+
+        ttk.Label(tab2, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
+        ttk.Button(tab2, text='Reset naar standaardwaarden',command=lambda: self.send_command('reset_to_default', 'LIGHT')).grid(row=5, column=1, stick="nsew")
+
+        # buttons and text for the temperature section
+        ttk.Label(tab3, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
+
+        ttk.Label(tab3, text="Handmatig uitrollen:").grid(row=1, column=0, stick="nsew")
+        ttk.Button(tab3, text='Handmatig uitrollen', command=lambda: self.send_command('manual_roll_out', 'TEMPERATURE')).grid(row=1, column=1, stick="nsew")
+
+        ttk.Label(tab3, text="Handmatig oprollen:").grid(row=2, column=0, stick="nsew")
+        ttk.Button(tab3, text='Handmatig oprollen', command=lambda: self.send_command('manual_roll_in', 'TEMPERATURE')).grid(row=2, column=1, stick="nsew")
+
+        ttk.Label(tab3, text="Automatisch rollen uitschakelen:").grid(row=3, column=0, stick="nsew")
+        ttk.Button(tab3, text='Automatisch rollen uitschakelen', command=lambda: self.send_command('disable_autoroll', 'TEMPERATURE')).grid(row=3, column=1,
+                                                                                                   stick="nsew")
+
+        ttk.Label(tab3, text="Automatisch rollen inschakelen:").grid(row=4, column=0, stick="nsew")
+        ttk.Button(tab3, text='Automatisch rollen inschakelen', command=lambda: self.send_command('enable_autoroll', 'TEMPERATURE')).grid(row=4, column=1,
+                                                                                                  stick="nsew")
+        ttk.Label(tab3, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
+        ttk.Button(tab3, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'TEMPERATURE')).grid(row=5, column=1,
+                                                                        stick="nsew")
 
         root.mainloop()
