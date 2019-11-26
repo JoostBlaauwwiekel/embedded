@@ -57,7 +57,7 @@ class Device(threading.Thread):
         if(new_max > self.device_min_border):
             self.write_data(b'\x01')
             time.sleep(1)
-            # self.write_data() -> hier moet new_max als byte getal gestuurd worden
+            self.write_data(bytes([new_max]))
             self.device_max_border = new_max
             print("Maximale uitrol waarde is succesvol aangepast")
         else:
@@ -68,7 +68,7 @@ class Device(threading.Thread):
         if(new_min < self.device_max_border):
             self.write_data(b'\x02')
             time.sleep(1)
-            # self.write_data() -> hier moet new_min als byte getal gestuurd worden
+            self.write_data(bytes([new_min]))
             self.device_min_border = new_min
             print("Maximale oprol waarde is succesvol aangepast")
         else:
