@@ -83,11 +83,13 @@ class Device(threading.Thread):
     def manual_roll_out(self):
         self.write_data(b'\x03')
         print("Het rolluik rolt nu uit (let op: automatisch rollen is uitgeschakeld)")
+        messagebox.showinfo("Melding", "Het rolluik rolt nu uit (let op: automatisch rollen is uitgeschakeld)")
 
     # manually roll in
     def manual_roll_in(self):
         self.write_data(b'\x04')
         print("Het rolluik rolt nu op (let op: automatisch rollen is uitgeschakeld)")
+        messagebox.showinfo("Melding", "Het rolluik rolt nu op (let op: automatisch rollen is uitgeschakeld)")
 
     # reset border and auto roll values back to default
     def reset_to_default(self):
@@ -96,13 +98,16 @@ class Device(threading.Thread):
         self.device_max_border = 50
         self.device_auto_roll = True
         print("De maximale op- en uitrol waarden zijn gereset naar de standaard waarden")
+        messagebox.showinfo("Melding", "De maximale op- en uitrol waarden zijn gereset naar de standaard waarden")
 
     # disable automatic rolling
     def disable_auto_roll(self):
         self.write_data(b'\x06')
         print("Automatisch rollen is nu uitgeschakeld")
+        messagebox.showinfo("Melding", "Automatisch rollen is nu uitgeschakeld")
 
     # enable automatic rolling
     def enable_auto_roll(self):
         self.write_data(b'\x07')
         print("Automatisch rollen is nu ingeschakeld")
+        messagebox.showinfo("Melding", "Automatisch rollen is nu ingeschakeld")
