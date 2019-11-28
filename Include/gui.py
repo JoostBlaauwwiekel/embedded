@@ -8,11 +8,22 @@ from tkinter import *
 from tkinter.ttk import *
 
 import matplotlib
-matplotlib.use("TkAgg")
-from matplotlib.figure import Figure
+matplotlib.use('TkAgg')
+import numpy as np
+import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+import tkinter as tk
+import tkinter.ttk as ttk
+import sys
+
 
 class Gui(threading.Thread):
+
+    light_sensor_data_x = [0,0]
+    light_sensor_data_y = [0,0]
+
+    counter = 0
 
     def __init__(self):
         threading.Thread.__init__(self)
@@ -129,6 +140,8 @@ class Gui(threading.Thread):
         try:
             self.label1.config(text=self.change_light())
             self.light.config(text=self.get_last_light())
+            self.light_sensor_data_x.append(self.counter)
+            self.light_sensor_data_y.append(self.get_last_light())
 
             self.label2.config(text=self.change_temperature())
             self.temperature.config(text=self.get_last_temperature())
@@ -141,6 +154,8 @@ class Gui(threading.Thread):
 
             self.label5.config(text=self.change_air())
             self.air.config(text=self.get_last_air())
+
+            self.counter += 1
         except: TypeError
 
     def detect_disconnected_devices(self):
@@ -503,19 +518,27 @@ class Gui(threading.Thread):
                    command=lambda: self.send_command('reset_to_default', 'AIR')).grid(row=7, column=1,
                                                                                        stick="nsew")
 
-        self.drawGraph(root, 1, 1)
+        self.createGraph(tab2, 8, 1)
 
         root.mainloop()
 
-    def drawGraph(self, root, row, column):
-        figure = Figure()
-        plot = figure.add_subplot()
+    def createGraph(self, tab, row, column):
+        figure = plt.figure(figsize=(8,8))
+        ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
-        x = [0, 1, 2, 3, 4, 5] # tijd om de minuut
-        y = [0, 2, 7, 8, 1, 10] # waarde van sensor
-
-        plot.plot(x, y, color="orange")
-
-        canvas = FigureCanvasTkAgg(figure, root)
+        canvas = FigureCanvasTkAgg(figure, tab)
         canvas.get_tk_widget().grid(row=row, column=column)
+        canvas.draw()
+
+        self.plotbutton = tk.Button(text="plot", command=lambda: self.plotGraph(canvas, ax))
+        self.plotbutton.grid(row=0, column=0)
+
+    def plotGraph(self, canvas, ax):
+        x = self.light_sensor_data_x # tijd om de minuut
+        y = self.light_sensor_data_y # waarde van sensor
+
+        ax.plot(x, y)
+
+        canvas.draw()
+        ax.clear()
 
