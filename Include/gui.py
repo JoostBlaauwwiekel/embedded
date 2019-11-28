@@ -327,16 +327,16 @@ class Gui(threading.Thread):
         ttk.Label(frame, text="Het eerste wat u ziet als u de centrale start is\n"
                              "de dashboard. Hier kunt u zien welke besturings-\n"
                              "eenheden zijn aangesloten op uw rolluik of\n"
-                             "zonnescherm. Verder staan hier de grafieken\n"
-                             "van de gemeten sensorwaarden van elke eenheid.\n"
-                             "Ook krijgt u de laatste meting van elke sensor\n"
-                             "die de centrale ontvangen heeft.\n").grid(row=2, column=1, stick="NW")
+                             "zonnescherm. Ook krijgt u de laatste meting van \n"
+                             "elke sensor die de centrale ontvangen heeft.\n").grid(row=2, column=1, stick="NW")
 
         ttk.Label(frame, text="Instellingen:", font=('arial', 9, 'bold')).grid(row=3, column=0, stick="NW")
         ttk.Label(frame, text="Alle besturingseenheden hebben hun eigen tabblad.\n"
                              "Hier staan de knoppen om instellingen te wijzigen\n"
-                             "van een gegeven besturingseenheid. Deze worden\n"
-                             "verder besproken in de kopjes hieronder.\n").grid(row=3, column=1, stick="NW")
+                             "van een gegeven besturingseenheid. \n"
+                             "Deze worden verder besproken in de kopjes \n"
+                            "hieronder. Verder staan hier de grafieken\n"
+                             "van de gemeten sensorwaarden van elke eenheid.\n").grid(row=3, column=1, stick="NW")
 
         ttk.Label(frame, text="Op- en uitrol grenzen:", font=('arial', 9, 'bold')).grid(row=4, column=0, stick="NW")
         ttk.Label(frame, text="Bij de instellingen staan twee vakken waar\n"

@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="30bde6f8-95e6-40c1-ae18-6695ff54e247" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Include/device.py" beforeDir="false" afterPath="$PROJECT_DIR$/Include/device.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Include/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/Include/gui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -73,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574946538626</updated>
-      <workItem from="1574955937790" duration="2462000" />
+      <workItem from="1574955937790" duration="5252000" />
     </task>
     <task id="LOCAL-00001" summary="able to change max and min values">
       <created>1574957419924</created>
@@ -82,7 +81,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574957419924</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="all tabs have now the buttons">
+      <created>1574958446589</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1574958446589</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added scrollbar">
+      <created>1574961064194</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1574961064194</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,9 +114,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="able to change max and min values" />
-    <option name="LAST_COMMIT_MESSAGE" value="able to change max and min values" />
+    <MESSAGE value="all tabs have now the buttons" />
+    <MESSAGE value="added scrollbar" />
+    <option name="LAST_COMMIT_MESSAGE" value="added scrollbar" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/embedded5$main.coverage" NAME="main Coverage Results" MODIFIED="1574958401179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Include" />
+    <SUITE FILE_PATH="coverage/embedded5$main.coverage" NAME="main Coverage Results" MODIFIED="1574961189736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Include" />
   </component>
 </project>
