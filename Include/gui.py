@@ -423,22 +423,18 @@ class Gui(threading.Thread):
                    command=lambda: self.send_command('reset_to_default', 'AIR')).grid(row=5, column=1,
                                                                                        stick="nsew")
 
-        self.drawGraph(root, 2, 0)
-        self.drawGraph(root, 2, 1)
-        self.drawGraph(root, 3, 0)
-        self.drawGraph(root, 3, 1)
+        self.drawGraph(root, 1, 1)
 
         root.mainloop()
 
     def drawGraph(self, root, row, column):
-        figure = Figure(figsize=(7, 4), dpi=100)
-        plot = figure.add_subplot(1, 1, 1)
+        figure = Figure()
+        plot = figure.add_subplot()
 
-        plot.plot(0.5, 0.3, color="red", marker="o", linestyle="")
+        x = [0, 1, 2, 3, 4, 5] # tijd om de minuut
+        y = [0, 2, 7, 8, 1, 10] # waarde van sensor
 
-        x = [0.1, 0.2, 0.3]
-        y = [-0.1, -0.2, -0.3]
-        plot.plot(x, y, color="blue", marker="x", linestyle="")
+        plot.plot(x, y, color="orange")
 
         canvas = FigureCanvasTkAgg(figure, root)
         canvas.get_tk_widget().grid(row=row, column=column)
