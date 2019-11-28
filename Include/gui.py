@@ -156,7 +156,7 @@ class Gui(threading.Thread):
                 self.last_temperature = "Onbekend"
 
     # this functions sends a command to a device
-    def send_command(self, command, device):
+    def send_command(self, command, device, value=0):
         if not self.connected_devices:
             messagebox.showinfo("Melding", "Fout: Betreffend apparaat niet aangesloten")
         else:
@@ -177,6 +177,12 @@ class Gui(threading.Thread):
 
                     if command == 'enable_autoroll':
                         connected_devices[1].enable_auto_roll()
+
+                    if command == 'min_border':
+                        connected_devices[1].change_min_border(value)
+
+                    if command == 'max_border':
+                        connected_devices[1].change_max_border(value)
                 else:
                     messagebox.showinfo("Melding", "Fout: Betreffend apparaat niet aangesloten")
 
@@ -267,8 +273,19 @@ class Gui(threading.Thread):
         ttk.Label(tab2, text="Automatisch rollen inschakelen:").grid(row=4, column=0, stick="nsew")
         ttk.Button(tab2, text='Automatisch rollen inschakelen', command=lambda: self.send_command('enable_autoroll', 'LIGHT')).grid(row=4, column=1, stick="nsew")
 
-        ttk.Label(tab2, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
-        ttk.Button(tab2, text='Reset naar standaardwaarden',command=lambda: self.send_command('reset_to_default', 'LIGHT')).grid(row=5, column=1, stick="nsew")
+        entry_light_min = ttk.Entry(tab2, width=25)
+        ttk.Button(tab2, text='Minimale uitrolwaarde',
+                   command=lambda: self.send_command('min_border', 'LIGHT', entry_light_min.get())).grid(row=5, column=1, stick="nsew")
+
+        entry_light_max = ttk.Entry(tab2, width=25)
+        ttk.Button(tab2, text='Maximale uitrolwaarde',
+                   command=lambda: self.send_command('max_border', 'LIGHT', entry_light_max.get())).grid(row=6, column=1, stick="nsew")
+
+        entry_light_min.grid(row=5, column=0)
+        entry_light_max.grid(row=6, column=0)
+
+        ttk.Label(tab2, text="Reset naar standaardwaarden:").grid(row=7, column=0, stick="nsew")
+        ttk.Button(tab2, text='Reset naar standaardwaarden',command=lambda: self.send_command('reset_to_default', 'LIGHT')).grid(row=7, column=1, stick="nsew")
 
         # buttons and text for the temperature section
         ttk.Label(tab3, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
@@ -284,10 +301,19 @@ class Gui(threading.Thread):
                                                                                                    stick="nsew")
 
         ttk.Label(tab3, text="Automatisch rollen inschakelen:").grid(row=4, column=0, stick="nsew")
-        ttk.Button(tab3, text='Automatisch rollen inschakelen', command=lambda: self.send_command('enable_autoroll', 'TEMPERATURE')).grid(row=4, column=1,
-                                                                                                  stick="nsew")
-        ttk.Label(tab3, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
-        ttk.Button(tab3, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'TEMPERATURE')).grid(row=5, column=1,
+        ttk.Button(tab3, text='Automatisch rollen inschakelen', command=lambda: self.send_command('enable_autoroll', 'TEMPERATURE')).grid(row=4, column=1, stick="nsew")
+
+        entry_temperature_min = ttk.Entry(tab3, width=25)
+        ttk.Button(tab3, text='Minimale uitrolwaarde', command=lambda: self.send_command('min_border', 'TEMPERATURE', entry_temperature_min.get())).grid(row=5, column=1, stick="nsew")
+
+        entry_temperature_max = ttk.Entry(tab3, width=25)
+        ttk.Button(tab3, text='Maximale uitrolwaarde', command=lambda: self.send_command('max_border', 'TEMPERATURE', entry_temperature_max.get())).grid(row=6, column=1, stick="nsew")
+
+        entry_temperature_min.grid(row=5, column=0)
+        entry_temperature_max.grid(row=6, column=0)
+
+        ttk.Label(tab3, text="Reset naar standaardwaarden:").grid(row=7, column=0, stick="nsew")
+        ttk.Button(tab3, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'TEMPERATURE')).grid(row=7, column=1,
                                                                         stick="nsew")
         # help tab with information on how to work the central
         ttk.Label(tab7, text="Help", font=('arial', 18, 'bold')).grid(row=0, columnspan=2)

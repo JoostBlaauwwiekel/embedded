@@ -55,11 +55,11 @@ class Device(threading.Thread):
 
     # change maximum roll out border
     def change_max_border(self, new_max):
-        if(new_max > self.device_min_border):
+        if(int(new_max) > self.device_min_border):
             self.write_data(b'\x01')
             time.sleep(1)
-            self.write_data(bytes([new_max]))
-            self.device_max_border = new_max
+            self.write_data(bytes([int(new_max)]))
+            self.device_max_border = int(new_max)
             print("Maximale uitrol waarde is succesvol aangepast")
             messagebox.showinfo("Melding", "Maximale uitrol waarde is succesvol aangepast")
         else:
@@ -68,11 +68,11 @@ class Device(threading.Thread):
 
     # change maximum roll in border
     def change_min_border(self, new_min):
-        if(new_min < self.device_max_border):
+        if(int(new_min) < self.device_max_border):
             self.write_data(b'\x02')
             time.sleep(1)
-            self.write_data(bytes([new_min]))
-            self.device_min_border = new_min
+            self.write_data(bytes([int(new_min)]))
+            self.device_min_border = int(new_min)
             print("Maximale oprol waarde is succesvol aangepast")
             messagebox.showinfo("Melding", "Maximale oprol waarde is succesvol aangepast")
         else:
