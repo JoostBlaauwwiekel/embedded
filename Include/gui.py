@@ -316,11 +316,15 @@ class Gui(threading.Thread):
         ttk.Button(tab3, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'TEMPERATURE')).grid(row=7, column=1,
                                                                         stick="nsew")
         # help tab with information on how to work the central
-        ttk.Label(tab7, text="Help", font=('arial', 18, 'bold')).grid(row=0, columnspan=2)
-        ttk.Label(tab7, text="Hier vindt u uitleg en informatie over werken met de centrale\n", font=('arial', 10)).grid(row=1, columnspan=2)
+        canvas = Canvas(tab7, height=250, width=500)
+        scroll_y = ttk.Scrollbar(tab7, orient="vertical", command=canvas.yview)
+        frame = ttk.Frame(canvas)
 
-        ttk.Label(tab7, text="Dashboard:", font=('arial', 9, 'bold')).grid(row=2, column=0, stick="NW")
-        ttk.Label(tab7, text="Het eerste wat u ziet als u de centrale start is\n"
+        ttk.Label(frame, text="Help", font=('arial', 18, 'bold')).grid(row=0, columnspan=2)
+        ttk.Label(frame, text="Hier vindt u uitleg en informatie over werken met de centrale\n", font=('arial', 10)).grid(row=1, columnspan=2)
+
+        ttk.Label(frame, text="Dashboard:", font=('arial', 9, 'bold')).grid(row=2, column=0, stick="NW")
+        ttk.Label(frame, text="Het eerste wat u ziet als u de centrale start is\n"
                              "de dashboard. Hier kunt u zien welke besturings-\n"
                              "eenheden zijn aangesloten op uw rolluik of\n"
                              "zonnescherm. Verder staan hier de grafieken\n"
@@ -328,21 +332,21 @@ class Gui(threading.Thread):
                              "Ook krijgt u de laatste meting van elke sensor\n"
                              "die de centrale ontvangen heeft.\n").grid(row=2, column=1, stick="NW")
 
-        ttk.Label(tab7, text="Instellingen:", font=('arial', 9, 'bold')).grid(row=3, column=0, stick="NW")
-        ttk.Label(tab7, text="Alle besturingseenheden hebben hun eigen tabblad.\n"
+        ttk.Label(frame, text="Instellingen:", font=('arial', 9, 'bold')).grid(row=3, column=0, stick="NW")
+        ttk.Label(frame, text="Alle besturingseenheden hebben hun eigen tabblad.\n"
                              "Hier staan de knoppen om instellingen te wijzigen\n"
                              "van een gegeven besturingseenheid. Deze worden\n"
                              "verder besproken in de kopjes hieronder.\n").grid(row=3, column=1, stick="NW")
 
-        ttk.Label(tab7, text="Op- en uitrol grenzen:", font=('arial', 9, 'bold')).grid(row=4, column=0, stick="NW")
-        ttk.Label(tab7, text="Bij de instellingen staan twee vakken waar\n"
+        ttk.Label(frame, text="Op- en uitrol grenzen:", font=('arial', 9, 'bold')).grid(row=4, column=0, stick="NW")
+        ttk.Label(frame, text="Bij de instellingen staan twee vakken waar\n"
                              "u in kunt typen. Met deze waarden kunt u de\n"
                              "oprol en uitrol grenzen (in centimeters)\n"
                              "aanpassen. De startwaarden van elke eenheid\n"
                              "is minimaal 10cm en maximaal 50cm.\n").grid(row=4, column=1, stick="NW")
 
-        ttk.Label(tab7, text="Handmatig rollen:", font=('arial', 9, 'bold')).grid(row=5, column=0, stick="NW")
-        ttk.Label(tab7, text="Er zijn twee knoppen voor het handmatig rollen.\n"
+        ttk.Label(frame, text="Handmatig rollen:", font=('arial', 9, 'bold')).grid(row=5, column=0, stick="NW")
+        ttk.Label(frame, text="Er zijn twee knoppen voor het handmatig rollen.\n"
                              "Één voor oprollen en één voor uitrollen. Nadat\n"
                              "u op een knop drukt zal uw rolluik of zonne-\n"
                              "scherm op- of uitrollen, afhankelijk van welke\n"
@@ -351,22 +355,31 @@ class Gui(threading.Thread):
                              "rollen wordt uitgeschakeld en dat u deze hand-\n"
                              "matig weer moet inschakelen\n").grid(row=5, column=1, stick="NW")
 
-        ttk.Label(tab7, text="Automatisch rollen:", font=('arial', 9, 'bold')).grid(row=6, column=0, stick="NW")
-        ttk.Label(tab7, text="Ook hier zijn twee knoppen voor, het in- en\n"
+        ttk.Label(frame, text="Automatisch rollen:", font=('arial', 9, 'bold')).grid(row=6, column=0, stick="NW")
+        ttk.Label(frame, text="Ook hier zijn twee knoppen voor, het in- en\n"
                              "uitschakelen van het automatisch rollen. Als\n"
                              "u het automatisch rollen uitschakeld dan zal\n"
                              "uw rolluik of zonnescherm niet meer rollen bij\n"
                              "de grenswaarden van de sensoren, maar alleen\n"
                              "als u op één van de handmatig rollen knoppen\ndrukt.\n").grid(row=6, column=1, stick="NW")
 
-        ttk.Label(tab7, text="Waarden resetten:", font=('arial', 9, 'bold')).grid(row=7, column=0, stick="NW")
-        ttk.Label(tab7, text="Als u op de 'reset naar standaardwaarden' knop\n"
+        ttk.Label(frame, text="Waarden resetten:", font=('arial', 9, 'bold')).grid(row=7, column=0, stick="NW")
+        ttk.Label(frame, text="Als u op de 'reset naar standaardwaarden' knop\n"
                              "drukt dan zullen de op- en uitrolgrenzen herstelt\n"
                              "worden naar hun originele waarden (10cm & 50cm).\n"
                              "Ook zal het automatisch rollen weer ingeschakeld\n"
                              "zijn.").grid(row=7, column=1, stick="NW")
 
-        ttk.Label(tab7, text="\nCopyright © 2019 Zeng Ltd.").grid(row=8, columnspan=5)
+        ttk.Label(frame, text="\nCentrale versie 1.1").grid(row=8, columnspan=5)
+
+        ttk.Label(frame, text="\nCopyright © 2019 Zeng Ltd.").grid(row=9, columnspan=5)
+
+        canvas.create_window(0, 0, anchor='nw', window=frame)
+        canvas.update_idletasks()
+        canvas.configure(scrollregion=canvas.bbox('all'), yscrollcommand=scroll_y.set)
+
+        canvas.grid(row=0, column=0)
+        scroll_y.grid(row=0, column=3, sticky='ns')
 
         # buttons and text for the wind section
         ttk.Label(tab4, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
