@@ -23,6 +23,9 @@ class Gui(threading.Thread):
     light_sensor_data_x = [0,0]
     light_sensor_data_y = [0,0]
 
+    temp_sensor_data_x = [0,0]
+    temp_sensor_data_y = [0,0]
+
     counter = 0
 
     def __init__(self):
@@ -145,6 +148,8 @@ class Gui(threading.Thread):
 
             self.label2.config(text=self.change_temperature())
             self.temperature.config(text=self.get_last_temperature())
+            self.temp_sensor_data_x.append(self.counter)
+            self.temp_sensor_data_y.append(self.get_last_temperature())
 
             self.label3.config(text=self.change_wind())
             self.wind.config(text=self.get_last_wind())
@@ -518,11 +523,12 @@ class Gui(threading.Thread):
                    command=lambda: self.send_command('reset_to_default', 'AIR')).grid(row=7, column=1,
                                                                                        stick="nsew")
 
-        self.createGraph(tab2, 8, 1)
+        self.createLightGraph(tab2, 8, 1)
+        self.createTempGraph(tab3, 8, 1)
 
         root.mainloop()
 
-    def createGraph(self, tab, row, column):
+    def createLightGraph(self, tab, row, column):
         figure = plt.figure(figsize=(8,8))
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
@@ -530,12 +536,32 @@ class Gui(threading.Thread):
         canvas.get_tk_widget().grid(row=row, column=column)
         canvas.draw()
 
-        self.plotbutton = tk.Button(text="plot", command=lambda: self.plotGraph(canvas, ax))
+        self.plotbutton = tk.Button(text="plot", command=lambda: self.plotLightGraph(canvas, ax))
         self.plotbutton.grid(row=0, column=0)
 
-    def plotGraph(self, canvas, ax):
+    def createTempGraph(self, tab, row, column):
+        figure = plt.figure(figsize=(8,8))
+        ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
+
+        canvas = FigureCanvasTkAgg(figure, tab)
+        canvas.get_tk_widget().grid(row=row, column=column)
+        canvas.draw()
+
+        self.plotbutton = tk.Button(text="plot", command=lambda: self.plotTempGraph(canvas, ax))
+        self.plotbutton.grid(row=0, column=0)
+
+    def plotLightGraph(self, canvas, ax):
         x = self.light_sensor_data_x # tijd om de minuut
         y = self.light_sensor_data_y # waarde van sensor
+
+        ax.plot(x, y)
+
+        canvas.draw()
+        ax.clear()
+
+    def plotTempGraph(self, canvas, ax):
+        x = self.temp_sensor_data_x # tijd om de minuut
+        y = self.temp_sensor_data_y # waarde van sensor
 
         ax.plot(x, y)
 
