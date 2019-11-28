@@ -279,4 +279,85 @@ class Gui(threading.Thread):
         ttk.Button(tab3, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'TEMPERATURE')).grid(row=5, column=1,
                                                                         stick="nsew")
 
+        # buttons and text for the wind section
+        ttk.Label(tab4, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
+
+        ttk.Label(tab4, text="Handmatig uitrollen:").grid(row=1, column=0, stick="nsew")
+        ttk.Button(tab4, text='Handmatig uitrollen',
+                   command=lambda: self.send_command('manual_roll_out', 'WIND')).grid(row=1, column=1,
+                                                                                             stick="nsew")
+
+        ttk.Label(tab4, text="Handmatig oprollen:").grid(row=2, column=0, stick="nsew")
+        ttk.Button(tab4, text='Handmatig oprollen',
+                   command=lambda: self.send_command('manual_roll_in', 'WIND')).grid(row=2, column=1,
+                                                                                            stick="nsew")
+
+        ttk.Label(tab4, text="Automatisch rollen uitschakelen:").grid(row=3, column=0, stick="nsew")
+        ttk.Button(tab4, text='Automatisch rollen uitschakelen',
+                   command=lambda: self.send_command('disable_autoroll', 'WIND')).grid(row=3, column=1,
+                                                                                              stick="nsew")
+
+        ttk.Label(tab4, text="Automatisch rollen inschakelen:").grid(row=4, column=0, stick="nsew")
+        ttk.Button(tab4, text='Automatisch rollen inschakelen',
+                   command=lambda: self.send_command('enable_autoroll', 'WIND')).grid(row=4, column=1,
+                                                                                             stick="nsew")
+        ttk.Label(tab4, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
+        ttk.Button(tab4, text='Reset naar standaardwaarden',
+                   command=lambda: self.send_command('reset_to_default', 'WIND')).grid(row=5, column=1,
+                                                                                              stick="nsew")
+
+        # buttons and text for the rain section
+        ttk.Label(tab5, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
+
+        ttk.Label(tab5, text="Handmatig uitrollen:").grid(row=1, column=0, stick="nsew")
+        ttk.Button(tab5, text='Handmatig uitrollen',
+                   command=lambda: self.send_command('manual_roll_out', 'RAIN')).grid(row=1, column=1,
+                                                                                      stick="nsew")
+
+        ttk.Label(tab5, text="Handmatig oprollen:").grid(row=2, column=0, stick="nsew")
+        ttk.Button(tab5, text='Handmatig oprollen',
+                   command=lambda: self.send_command('manual_roll_in', 'RAIN')).grid(row=2, column=1,
+                                                                                     stick="nsew")
+
+        ttk.Label(tab5, text="Automatisch rollen uitschakelen:").grid(row=3, column=0, stick="nsew")
+        ttk.Button(tab5, text='Automatisch rollen uitschakelen',
+                   command=lambda: self.send_command('disable_autoroll', 'RAIN')).grid(row=3, column=1,
+                                                                                       stick="nsew")
+
+        ttk.Label(tab5, text="Automatisch rollen inschakelen:").grid(row=4, column=0, stick="nsew")
+        ttk.Button(tab5, text='Automatisch rollen inschakelen',
+                   command=lambda: self.send_command('enable_autoroll', 'RAIN')).grid(row=4, column=1,
+                                                                                      stick="nsew")
+        ttk.Label(tab5, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
+        ttk.Button(tab5, text='Reset naar standaardwaarden',
+                   command=lambda: self.send_command('reset_to_default', 'RAIN')).grid(row=5, column=1,
+                                                                                       stick="nsew")
+
+        # buttons and text for the air section
+        ttk.Label(tab6, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
+
+        ttk.Label(tab6, text="Handmatig uitrollen:").grid(row=1, column=0, stick="nsew")
+        ttk.Button(tab6, text='Handmatig uitrollen',
+                   command=lambda: self.send_command('manual_roll_out', 'AIR')).grid(row=1, column=1,
+                                                                                      stick="nsew")
+
+        ttk.Label(tab6, text="Handmatig oprollen:").grid(row=2, column=0, stick="nsew")
+        ttk.Button(tab6, text='Handmatig oprollen',
+                   command=lambda: self.send_command('manual_roll_in', 'AIR')).grid(row=2, column=1,
+                                                                                     stick="nsew")
+
+        ttk.Label(tab6, text="Automatisch rollen uitschakelen:").grid(row=3, column=0, stick="nsew")
+        ttk.Button(tab6, text='Automatisch rollen uitschakelen',
+                   command=lambda: self.send_command('disable_autoroll', 'AiR')).grid(row=3, column=1,
+                                                                                       stick="nsew")
+
+        ttk.Label(tab6, text="Automatisch rollen inschakelen:").grid(row=4, column=0, stick="nsew")
+        ttk.Button(tab6, text='Automatisch rollen inschakelen',
+                   command=lambda: self.send_command('enable_autoroll', 'AIR')).grid(row=4, column=1,
+                                                                                      stick="nsew")
+        ttk.Label(tab6, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
+        ttk.Button(tab6, text='Reset naar standaardwaarden',
+                   command=lambda: self.send_command('reset_to_default', 'AIR')).grid(row=5, column=1,
+                                                                                       stick="nsew")
+
         root.mainloop()
