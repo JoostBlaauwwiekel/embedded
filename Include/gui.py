@@ -529,7 +529,7 @@ class Gui(threading.Thread):
         root.mainloop()
 
     def createLightGraph(self, tab, row, column):
-        figure = plt.figure(figsize=(8,8))
+        figure = plt.figure()
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
         canvas = FigureCanvasTkAgg(figure, tab)
@@ -540,7 +540,7 @@ class Gui(threading.Thread):
         self.plotbutton.grid(row=0, column=0)
 
     def createTempGraph(self, tab, row, column):
-        figure = plt.figure(figsize=(8,8))
+        figure = plt.figure()
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
         canvas = FigureCanvasTkAgg(figure, tab)
