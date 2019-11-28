@@ -143,13 +143,17 @@ class Gui(threading.Thread):
         try:
             self.label1.config(text=self.change_light())
             self.light.config(text=self.get_last_light())
-            self.light_sensor_data_x.append(self.counter)
-            self.light_sensor_data_y.append(self.get_last_light())
+
+            if self.last_light != "Onbekend":
+                self.light_sensor_data_x.append(self.counter)
+                self.light_sensor_data_y.append(self.last_light)
 
             self.label2.config(text=self.change_temperature())
             self.temperature.config(text=self.get_last_temperature())
-            self.temp_sensor_data_x.append(self.counter)
-            self.temp_sensor_data_y.append(self.get_last_temperature())
+
+            if self.last_temperature != "Onbekend":
+                self.temp_sensor_data_y.append(self.last_temperature)
+                self.temp_sensor_data_x.append(self.counter)
 
             self.label3.config(text=self.change_wind())
             self.wind.config(text=self.get_last_wind())
