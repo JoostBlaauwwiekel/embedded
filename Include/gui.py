@@ -4,6 +4,13 @@ from threading import *
 import threading
 from tkinter import messagebox
 
+from tkinter import *
+from tkinter.ttk import *
+
+import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class Gui(threading.Thread):
 
@@ -360,4 +367,22 @@ class Gui(threading.Thread):
                    command=lambda: self.send_command('reset_to_default', 'AIR')).grid(row=5, column=1,
                                                                                        stick="nsew")
 
+        self.drawGraph(root, 2, 0)
+        self.drawGraph(root, 2, 1)
+        self.drawGraph(root, 3, 0)
+        self.drawGraph(root, 3, 1)
+
         root.mainloop()
+
+    def drawGraph(self, root, row, column):
+        figure = Figure(figsize=(7, 4), dpi=100)
+        plot = figure.add_subplot(1, 1, 1)
+
+        plot.plot(0.5, 0.3, color="red", marker="o", linestyle="")
+
+        x = [0.1, 0.2, 0.3]
+        y = [-0.1, -0.2, -0.3]
+        plot.plot(x, y, color="blue", marker="x", linestyle="")
+
+        canvas = FigureCanvasTkAgg(figure, root)
+        canvas.get_tk_widget().grid(row=row, column=column)
