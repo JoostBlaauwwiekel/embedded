@@ -55,10 +55,16 @@ class SerialThread(threading.Thread):
             self.write_data(serial, b'\xFF')
             device_id = self.read_data(serial)
 
-            if device_id == 150:  # 0x96
+            if device_id == 150:    # 0x96
                 device = 'TEMPERATURE'
             elif device_id == 105:  # 0x69
                 device = 'LIGHT'
+            elif device_id == 119:  # 0x77
+                device = 'WIND'
+            elif device_id == 19:   # 0x13
+                device = 'RAIN'
+            elif device_id == 136:  # 0x88
+                device = 'AIR'
             else:
                 device = 0
 
