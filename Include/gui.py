@@ -198,6 +198,9 @@ class Gui(threading.Thread):
         tab6 = ttk.Label(tabControl)
         tabControl.add(tab6, text="Luchtvochtigheid")
 
+        tab7 = ttk.Label(tabControl)
+        tabControl.add(tab7, text="Help")
+
         root.columnconfigure(0, weight=1)
         root.columnconfigure(1, weight=1)
         root.columnconfigure(2, weight=1)
@@ -278,5 +281,57 @@ class Gui(threading.Thread):
         ttk.Label(tab3, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
         ttk.Button(tab3, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'TEMPERATURE')).grid(row=5, column=1,
                                                                         stick="nsew")
+        # help tab with information on how to work the central
+        ttk.Label(tab7, text="Help", font=('arial', 18, 'bold')).grid(row=0, columnspan=2)
+        ttk.Label(tab7, text="Hier vindt u uitleg en informatie over werken met de centrale\n", font=('arial', 10)).grid(row=1, columnspan=2)
+
+        ttk.Label(tab7, text="Dashboard:", font=('arial', 9, 'bold')).grid(row=2, column=0, stick="NW")
+        ttk.Label(tab7, text="Het eerste wat u ziet als u de centrale start is\n"
+                             "de dashboard. Hier kunt u zien welke besturings-\n"
+                             "eenheden zijn aangesloten op uw rolluik of\n"
+                             "zonnescherm. Verder staan hier de grafieken\n"
+                             "van de gemeten sensorwaarden van elke eenheid.\n"
+                             "Ook krijgt u de laatste meting van elke sensor\n"
+                             "die de centrale ontvangen heeft.\n").grid(row=2, column=1, stick="NW")
+
+        ttk.Label(tab7, text="Instellingen:", font=('arial', 9, 'bold')).grid(row=3, column=0, stick="NW")
+        ttk.Label(tab7, text="Alle besturingseenheden hebben hun eigen tabblad.\n"
+                             "Hier staan de knoppen om instellingen te wijzigen\n"
+                             "van een gegeven besturingseenheid. Deze worden\n"
+                             "verder besproken in de kopjes hieronder.\n").grid(row=3, column=1, stick="NW")
+
+        ttk.Label(tab7, text="Op- en uitrol grenzen:", font=('arial', 9, 'bold')).grid(row=4, column=0, stick="NW")
+        ttk.Label(tab7, text="Bij de instellingen staan twee vakken waar\n"
+                             "u in kunt typen. Met deze waarden kunt u de\n"
+                             "oprol en uitrol grenzen (in centimeters)\n"
+                             "aanpassen. De startwaarden van elke eenheid\n"
+                             "is minimaal 10cm en maximaal 50cm.\n").grid(row=4, column=1, stick="NW")
+
+        ttk.Label(tab7, text="Handmatig rollen:", font=('arial', 9, 'bold')).grid(row=5, column=0, stick="NW")
+        ttk.Label(tab7, text="Er zijn twee knoppen voor het handmatig rollen.\n"
+                             "Één voor oprollen en één voor uitrollen. Nadat\n"
+                             "u op een knop drukt zal uw rolluik of zonne-\n"
+                             "scherm op- of uitrollen, afhankelijk van welke\n"
+                             "wordt ingedrukt. Let hierbij op dat na, het\n"
+                             "indrukken van deze knoppen, het automatische\n"
+                             "rollen wordt uitgeschakeld en dat u deze hand-\n"
+                             "matig weer moet inschakelen\n").grid(row=5, column=1, stick="NW")
+
+        ttk.Label(tab7, text="Automatisch rollen:", font=('arial', 9, 'bold')).grid(row=6, column=0, stick="NW")
+        ttk.Label(tab7, text="Ook hier zijn twee knoppen voor, het in- en\n"
+                             "uitschakelen van het automatisch rollen. Als\n"
+                             "u het automatisch rollen uitschakeld dan zal\n"
+                             "uw rolluik of zonnescherm niet meer rollen bij\n"
+                             "de grenswaarden van de sensoren, maar alleen\n"
+                             "als u op één van de handmatig rollen knoppen\ndrukt.\n").grid(row=6, column=1, stick="NW")
+
+        ttk.Label(tab7, text="Waarden resetten:", font=('arial', 9, 'bold')).grid(row=7, column=0, stick="NW")
+        ttk.Label(tab7, text="Als u op de 'reset naar standaardwaarden' knop\n"
+                             "drukt dan zullen de op- en uitrolgrenzen herstelt\n"
+                             "worden naar hun originele waarden (10cm & 50cm).\n"
+                             "Ook zal het automatisch rollen weer ingeschakeld\n"
+                             "zijn.").grid(row=7, column=1, stick="NW")
+
+        ttk.Label(tab7, text="\nCopyright © 2019 Zeng Ltd.").grid(row=8, columnspan=5)
 
         root.mainloop()
