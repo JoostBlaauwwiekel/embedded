@@ -285,7 +285,7 @@ class Gui(threading.Thread):
         entry_light_max.grid(row=6, column=0)
 
         ttk.Label(tab2, text="Reset naar standaardwaarden:").grid(row=7, column=0, stick="nsew")
-        ttk.Button(tab2, text='Reset naar standaardwaarden',command=lambda: self.send_command('reset_to_default', 'LIGHT')).grid(row=7, column=1, stick="nsew")
+        ttk.Button(tab2, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'LIGHT')).grid(row=7, column=1, stick="nsew")
 
         # buttons and text for the temperature section
         ttk.Label(tab3, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
@@ -390,9 +390,21 @@ class Gui(threading.Thread):
         ttk.Button(tab4, text='Automatisch rollen inschakelen',
                    command=lambda: self.send_command('enable_autoroll', 'WIND')).grid(row=4, column=1,
                                                                                              stick="nsew")
-        ttk.Label(tab4, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
+
+        entry_wind_min = ttk.Entry(tab4, width=25)
+        ttk.Button(tab4, text='Minimale uitrolwaarde',
+                   command=lambda: self.send_command('min_border', 'WIND', entry_wind_min.get())).grid(row=5, column=1, stick="nsew")
+
+        entry_wind_max = ttk.Entry(tab4, width=25)
+        ttk.Button(tab4, text='Maximale uitrolwaarde',
+                   command=lambda: self.send_command('max_border', 'WIND', entry_wind_max.get())).grid(row=6, column=1, stick="nsew")
+
+        entry_wind_min.grid(row=5, column=0)
+        entry_wind_max.grid(row=6, column=0)
+
+        ttk.Label(tab4, text="Reset naar standaardwaarden:").grid(row=7, column=0, stick="nsew")
         ttk.Button(tab4, text='Reset naar standaardwaarden',
-                   command=lambda: self.send_command('reset_to_default', 'WIND')).grid(row=5, column=1,
+                   command=lambda: self.send_command('reset_to_default', 'WIND')).grid(row=7, column=1,
                                                                                               stick="nsew")
 
         # buttons and text for the rain section
@@ -417,9 +429,23 @@ class Gui(threading.Thread):
         ttk.Button(tab5, text='Automatisch rollen inschakelen',
                    command=lambda: self.send_command('enable_autoroll', 'RAIN')).grid(row=4, column=1,
                                                                                       stick="nsew")
-        ttk.Label(tab5, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
+
+        entry_rain_min = ttk.Entry(tab5, width=25)
+        ttk.Button(tab5, text='Minimale uitrolwaarde',
+                   command=lambda: self.send_command('min_border', 'RAIN', entry_rain_min.get())).grid(row=5, column=1,
+                                                                                                        stick="nsew")
+
+        entry_rain_max = ttk.Entry(tab5, width=25)
+        ttk.Button(tab5, text='Maximale uitrolwaarde',
+                   command=lambda: self.send_command('max_border', 'RAIN', entry_rain_max.get())).grid(row=6, column=1,
+                                                                                                        stick="nsew")
+
+        entry_rain_min.grid(row=5, column=0)
+        entry_rain_max.grid(row=6, column=0)
+
+        ttk.Label(tab5, text="Reset naar standaardwaarden:").grid(row=7, column=0, stick="nsew")
         ttk.Button(tab5, text='Reset naar standaardwaarden',
-                   command=lambda: self.send_command('reset_to_default', 'RAIN')).grid(row=5, column=1,
+                   command=lambda: self.send_command('reset_to_default', 'RAIN')).grid(row=7, column=1,
                                                                                        stick="nsew")
 
         # buttons and text for the air section
@@ -444,9 +470,24 @@ class Gui(threading.Thread):
         ttk.Button(tab6, text='Automatisch rollen inschakelen',
                    command=lambda: self.send_command('enable_autoroll', 'AIR')).grid(row=4, column=1,
                                                                                       stick="nsew")
-        ttk.Label(tab6, text="Reset naar standaardwaarden:").grid(row=5, column=0, stick="nsew")
+
+        entry_air_min = ttk.Entry(tab6, width=25)
+        ttk.Button(tab6, text='Minimale uitrolwaarde',
+                   command=lambda: self.send_command('min_border', 'AIR', entry_air_min.get())).grid(row=5, column=1,
+                                                                                                        stick="nsew")
+
+        entry_air_max = ttk.Entry(tab6, width=25)
+        ttk.Button(tab6, text='Maximale uitrolwaarde',
+                   command=lambda: self.send_command('max_border', 'AIR', entry_air_max.get())).grid(row=6, column=1,
+                                                                                                        stick="nsew")
+
+        entry_air_min.grid(row=5, column=0)
+        entry_air_max.grid(row=6, column=0)
+
+
+        ttk.Label(tab6, text="Reset naar standaardwaarden:").grid(row=7, column=0, stick="nsew")
         ttk.Button(tab6, text='Reset naar standaardwaarden',
-                   command=lambda: self.send_command('reset_to_default', 'AIR')).grid(row=5, column=1,
+                   command=lambda: self.send_command('reset_to_default', 'AIR')).grid(row=7, column=1,
                                                                                        stick="nsew")
 
         self.drawGraph(root, 2, 0)
