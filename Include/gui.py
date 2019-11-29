@@ -540,8 +540,8 @@ class Gui(threading.Thread):
         canvas.get_tk_widget().grid(row=row, column=column)
         canvas.draw()
 
-        self.plotbutton = tk.Button(text="plot", command=lambda: self.plotLightGraph(canvas, ax))
-        self.plotbutton.grid(row=0, column=0)
+        self.plotbutton = ttk.Button(tab, text="plot1", command=lambda: self.plotLightGraph(canvas, ax))
+        self.plotbutton.grid(row=8, column=0)
 
     def createTempGraph(self, tab, row, column):
         figure = plt.figure()
@@ -551,8 +551,8 @@ class Gui(threading.Thread):
         canvas.get_tk_widget().grid(row=row, column=column)
         canvas.draw()
 
-        self.plotbutton = tk.Button(text="plot", command=lambda: self.plotTempGraph(canvas, ax))
-        self.plotbutton.grid(row=0, column=0)
+        self.plotbutton = ttk.Button(tab, text="plot2", command=lambda: self.plotTempGraph(canvas, ax))
+        self.plotbutton.grid(row=8, column=0)
 
     def plotLightGraph(self, canvas, ax):
         x = self.light_sensor_data_x # tijd om de minuut
