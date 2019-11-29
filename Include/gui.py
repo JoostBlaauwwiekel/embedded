@@ -564,7 +564,7 @@ class Gui(threading.Thread):
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
         canvas = FigureCanvasTkAgg(figure, tab)
-        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=10)
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotLightGraph(canvas, ax))
@@ -575,7 +575,7 @@ class Gui(threading.Thread):
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
         canvas = FigureCanvasTkAgg(figure, tab)
-        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=10)
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotTempGraph(canvas, ax))
@@ -586,7 +586,7 @@ class Gui(threading.Thread):
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
         canvas = FigureCanvasTkAgg(figure, tab)
-        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=10)
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotWindGraph(canvas, ax))
@@ -597,7 +597,7 @@ class Gui(threading.Thread):
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
         canvas = FigureCanvasTkAgg(figure, tab)
-        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=10)
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotRainGraph(canvas, ax))
@@ -608,7 +608,7 @@ class Gui(threading.Thread):
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
         canvas = FigureCanvasTkAgg(figure, tab)
-        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=10)
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotAirGraph(canvas, ax))
