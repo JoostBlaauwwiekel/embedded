@@ -238,11 +238,17 @@ class Gui(threading.Thread):
         tab7 = ttk.Label(tabControl)
         tabControl.add(tab7, text="Help")
 
-        root.columnconfigure(0, weight=1)
-        root.columnconfigure(1, weight=1)
-        root.columnconfigure(2, weight=1)
-        root.columnconfigure(3, weight=1)
-        root.columnconfigure(4, weight=1)
+        tab1.columnconfigure(0, weight=1)
+        tab1.columnconfigure(1, weight=1)
+        tab1.columnconfigure(2, weight=1)
+        tab1.columnconfigure(3, weight=1)
+        tab1.columnconfigure(4, weight=1)
+
+        tab1.rowconfigure(0, weight=1)
+        tab1.rowconfigure(1, weight=1)
+        tab1.rowconfigure(2, weight=1)
+        tab1.rowconfigure(3, weight=1)
+        tab1.rowconfigure(4, weight=1)
 
         self.label1 = ttk.Label(tab1, text=self.change_light(), width=20, anchor=S, justify=CENTER)
         self.label1.config(text=self.change_light())
@@ -278,9 +284,6 @@ class Gui(threading.Thread):
         self.wind.grid(row=0, column=2, stick="nsew")
         self.rain.grid(row=0, column=3, stick="nsew")
         self.air.grid(row=0, column=4, stick="nsew")
-
-        # just because its possible
-        ttk.Label(tab1, text="\nCopyright © 2019 Zeng Ltd.").grid(row=2, columnspan=5)
 
         # buttons and text for the light section
         ttk.Label(tab2, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
@@ -527,8 +530,8 @@ class Gui(threading.Thread):
                    command=lambda: self.send_command('reset_to_default', 'AIR')).grid(row=7, column=1,
                                                                                        stick="nsew")
 
-        self.createLightGraph(tab2, 8, 1)
-        self.createTempGraph(tab3, 8, 1)
+        self.createLightGraph(tab2, 0, 3)
+        self.createTempGraph(tab3, 0, 3)
 
         root.mainloop()
 
@@ -537,7 +540,7 @@ class Gui(threading.Thread):
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
         canvas = FigureCanvasTkAgg(figure, tab)
-        canvas.get_tk_widget().grid(row=row, column=column)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot1", command=lambda: self.plotLightGraph(canvas, ax))
@@ -548,7 +551,7 @@ class Gui(threading.Thread):
         ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
 
         canvas = FigureCanvasTkAgg(figure, tab)
-        canvas.get_tk_widget().grid(row=row, column=column)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot2", command=lambda: self.plotTempGraph(canvas, ax))
