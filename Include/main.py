@@ -26,7 +26,8 @@ class Main(Thread):
                 for device in connected_devices:
                     if device[0] == 'TEMPERATURE':
                         last_temperature = device[1].read_data()
-                        self.gui.set_temperature(last_temperature)
+                        if last_temperature != 187:
+                            self.gui.set_temperature(last_temperature)
 
                     if device[0] == 'LIGHT':
                         last_light = device[1].read_data()
