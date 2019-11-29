@@ -207,6 +207,9 @@ class Gui(threading.Thread):
 
                     if command == 'max_border':
                         connected_devices[1].change_max_border(value)
+
+                    if command == 'current_values':
+                        connected_devices[1].current_values()
                 else:
                     messagebox.showinfo("Melding", "Fout: Betreffend apparaat niet aangesloten")
 
@@ -314,6 +317,9 @@ class Gui(threading.Thread):
         ttk.Label(tab2, text="Reset naar standaardwaarden:").grid(row=7, column=0, stick="nsew")
         ttk.Button(tab2, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'LIGHT')).grid(row=7, column=1, stick="nsew")
 
+        ttk.Label(tab2, text="Zie huidige waarden:").grid(row=8, column=0, stick="nsew")
+        ttk.Button(tab2, text="Zie huidige waarden", command=lambda: self.send_command('current_values', 'LIGHT')).grid(row=8, column=1, stick="nsew")
+
         # buttons and text for the temperature section
         ttk.Label(tab3, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
 
@@ -342,6 +348,11 @@ class Gui(threading.Thread):
         ttk.Label(tab3, text="Reset naar standaardwaarden:").grid(row=7, column=0, stick="nsew")
         ttk.Button(tab3, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'TEMPERATURE')).grid(row=7, column=1,
                                                                         stick="nsew")
+
+        ttk.Label(tab3, text="Zie huidige waarden:").grid(row=8, column=0, stick="nsew")
+        ttk.Button(tab3, text="Zie huidige waarden", command=lambda: self.send_command('current_values', 'TEMPERATURE')).grid(
+            row=8, column=1, stick="nsew")
+
         # help tab with information on how to work the central
         canvas = Canvas(tab7, height=480, width=500)
         scroll_y = ttk.Scrollbar(tab7, orient="vertical", command=canvas.yview)
@@ -447,6 +458,9 @@ class Gui(threading.Thread):
                    command=lambda: self.send_command('reset_to_default', 'WIND')).grid(row=7, column=1,
                                                                                               stick="nsew")
 
+        ttk.Label(tab4, text="Zie huidige waarden:").grid(row=8, column=0, stick="nsew")
+        ttk.Button(tab4, text="Zie huidige waarden", command=lambda: self.send_command('current_values', 'WIND')).grid(
+            row=8, column=1, stick="nsew")
         # buttons and text for the rain section
         ttk.Label(tab5, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
 
@@ -488,6 +502,9 @@ class Gui(threading.Thread):
                    command=lambda: self.send_command('reset_to_default', 'RAIN')).grid(row=7, column=1,
                                                                                        stick="nsew")
 
+        ttk.Label(tab5, text="Zie huidige waarden:").grid(row=8, column=0, stick="nsew")
+        ttk.Button(tab5, text="Zie huidige waarden", command=lambda: self.send_command('current_values', 'RAIN')).grid(
+            row=8, column=1, stick="nsew")
         # buttons and text for the air section
         ttk.Label(tab6, text="Instellingen", font=('arial', 18)).grid(row=0, columnspan=2)
 
@@ -530,6 +547,10 @@ class Gui(threading.Thread):
                    command=lambda: self.send_command('reset_to_default', 'AIR')).grid(row=7, column=1,
                                                                                        stick="nsew")
 
+        ttk.Label(tab6, text="Zie huidige waarden:").grid(row=8, column=0, stick="nsew")
+        ttk.Button(tab6, text="Zie huidige waarden", command=lambda: self.send_command('current_values', 'AIR')).grid(
+            row=8, column=1, stick="nsew")
+
         self.createLightGraph(tab2, 0, 3)
         self.createTempGraph(tab3, 0, 3)
         self.createWindGraph(tab4, 0, 3)
@@ -547,7 +568,7 @@ class Gui(threading.Thread):
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotLightGraph(canvas, ax))
-        self.plotbutton.grid(row=8, column=0)
+        self.plotbutton.grid(row=9, column=0)
 
     def createTempGraph(self, tab, row, column):
         figure = plt.figure()
@@ -558,7 +579,7 @@ class Gui(threading.Thread):
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotTempGraph(canvas, ax))
-        self.plotbutton.grid(row=8, column=0)
+        self.plotbutton.grid(row=9, column=0)
 
     def createWindGraph(self, tab, row, column):
         figure = plt.figure()
@@ -569,7 +590,7 @@ class Gui(threading.Thread):
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotWindGraph(canvas, ax))
-        self.plotbutton.grid(row=8, column=0)
+        self.plotbutton.grid(row=9, column=0)
 
     def createRainGraph(self, tab, row, column):
         figure = plt.figure()
@@ -580,7 +601,7 @@ class Gui(threading.Thread):
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotRainGraph(canvas, ax))
-        self.plotbutton.grid(row=8, column=0)
+        self.plotbutton.grid(row=9, column=0)
 
     def createAirGraph(self, tab, row, column):
         figure = plt.figure()
@@ -591,7 +612,7 @@ class Gui(threading.Thread):
         canvas.draw()
 
         self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotAirGraph(canvas, ax))
-        self.plotbutton.grid(row=8, column=0)
+        self.plotbutton.grid(row=9, column=0)
 
     def plotLightGraph(self, canvas, ax):
         x = self.light_sensor_data_x # tijd om de minuut

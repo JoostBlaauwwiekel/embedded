@@ -117,3 +117,15 @@ class Device(threading.Thread):
         self.write_data(b'\x07')
         print("Automatisch rollen is nu ingeschakeld")
         messagebox.showinfo("Melding", "Automatisch rollen is nu ingeschakeld")
+
+    def current_values(self):
+        if(self.device_auto_roll == True):
+            auto_roll_string = "Ingeschakeld"
+        else:
+            auto_roll_string = "Uitgeschakeld"
+
+
+        print("Minimale uitrolwaarde: {0}cm.\nMaximale uitrolwaarde: {1}cm.\nAutomatisch rollen: {2}.".format(
+            self.device_min_border, self.device_max_border, auto_roll_string))
+        messagebox.showinfo("Melding", "Minimale uitrolwaarde: {0}cm.\nMaximale uitrolwaarde: {1}cm.\nAutomatisch rollen: {2}.".format(
+            self.device_min_border, self.device_max_border, auto_roll_string))
