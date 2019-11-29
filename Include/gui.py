@@ -343,7 +343,7 @@ class Gui(threading.Thread):
         ttk.Button(tab3, text='Reset naar standaardwaarden', command=lambda: self.send_command('reset_to_default', 'TEMPERATURE')).grid(row=7, column=1,
                                                                         stick="nsew")
         # help tab with information on how to work the central
-        canvas = Canvas(tab7, height=250, width=500)
+        canvas = Canvas(tab7, height=480, width=500)
         scroll_y = ttk.Scrollbar(tab7, orient="vertical", command=canvas.yview)
         frame = ttk.Frame(canvas)
 
@@ -532,6 +532,9 @@ class Gui(threading.Thread):
 
         self.createLightGraph(tab2, 0, 3)
         self.createTempGraph(tab3, 0, 3)
+        self.createWindGraph(tab4, 0, 3)
+        self.createRainGraph(tab5, 0, 3)
+        self.createAirGraph(tab6, 0, 3)
 
         root.mainloop()
 
@@ -543,7 +546,7 @@ class Gui(threading.Thread):
         canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
         canvas.draw()
 
-        self.plotbutton = ttk.Button(tab, text="plot1", command=lambda: self.plotLightGraph(canvas, ax))
+        self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotLightGraph(canvas, ax))
         self.plotbutton.grid(row=8, column=0)
 
     def createTempGraph(self, tab, row, column):
@@ -554,7 +557,40 @@ class Gui(threading.Thread):
         canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
         canvas.draw()
 
-        self.plotbutton = ttk.Button(tab, text="plot2", command=lambda: self.plotTempGraph(canvas, ax))
+        self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotTempGraph(canvas, ax))
+        self.plotbutton.grid(row=8, column=0)
+
+    def createWindGraph(self, tab, row, column):
+        figure = plt.figure()
+        ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
+
+        canvas = FigureCanvasTkAgg(figure, tab)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
+        canvas.draw()
+
+        self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotWindGraph(canvas, ax))
+        self.plotbutton.grid(row=8, column=0)
+
+    def createRainGraph(self, tab, row, column):
+        figure = plt.figure()
+        ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
+
+        canvas = FigureCanvasTkAgg(figure, tab)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
+        canvas.draw()
+
+        self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotRainGraph(canvas, ax))
+        self.plotbutton.grid(row=8, column=0)
+
+    def createAirGraph(self, tab, row, column):
+        figure = plt.figure()
+        ax = figure.add_axes([0.1, 0.1, 0.8, 0.8])
+
+        canvas = FigureCanvasTkAgg(figure, tab)
+        canvas.get_tk_widget().grid(row=row, column=column, rowspan=9)
+        canvas.draw()
+
+        self.plotbutton = ttk.Button(tab, text="plot", command=lambda: self.plotAirGraph(canvas, ax))
         self.plotbutton.grid(row=8, column=0)
 
     def plotLightGraph(self, canvas, ax):
@@ -575,3 +611,29 @@ class Gui(threading.Thread):
         canvas.draw()
         ax.clear()
 
+    def plotWindGraph(self, canvas, ax):
+        x = self.temp_sensor_data_x # tijd om de minuut
+        y = self.temp_sensor_data_y # waarde van sensor
+
+        ax.plot(x, y)
+
+        canvas.draw()
+        ax.clear()
+
+    def plotRainGraph(self, canvas, ax):
+        x = self.temp_sensor_data_x # tijd om de minuut
+        y = self.temp_sensor_data_y # waarde van sensor
+
+        ax.plot(x, y)
+
+        canvas.draw()
+        ax.clear()
+
+    def plotAirGraph(self, canvas, ax):
+        x = self.temp_sensor_data_x # tijd om de minuut
+        y = self.temp_sensor_data_y # waarde van sensor
+
+        ax.plot(x, y)
+
+        canvas.draw()
+        ax.clear()
