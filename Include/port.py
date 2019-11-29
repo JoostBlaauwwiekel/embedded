@@ -4,6 +4,7 @@ import threading
 from Include.device import Device
 from threading import *
 from time import sleep
+from tkinter import messagebox
 
 
 # noinspection PyBroadException,PyArgumentList
@@ -105,4 +106,5 @@ class SerialThread(threading.Thread):
 
             except serial.SerialException:
                 print('Device disconnected on port', connection[2])
+                messagebox.showinfo("Melding", 'Device disconnected on port {0}'.format(connection[2]))
                 self.connected_devices.remove(connection)
